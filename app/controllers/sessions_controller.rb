@@ -13,6 +13,7 @@ class SessionsController < Clearance::SessionsController
     params.require(:session).permit(:password).merge(email: user.email)
   end
 
+  # returns a Guest if not existent
   def user
     User.where(email: email_or_username).or(User.where(username: email_or_username)).first || Guest.new
   end
